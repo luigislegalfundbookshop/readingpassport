@@ -3,241 +3,581 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luigi's Legal Fund Bookshop - Social Media Calendar</title>
+    <title>Luigi's Legal Fund Bookshop Reading List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --color-cream: #e0e0e0;
+            --color-dark-green: #2c5530;
+            --color-mid-green: #739e82;
+            --color-navy: #000080;
+            --color-white: #ffffff;
+            --font-main: 'Playfair Display', serif;
         }
-        
+
         body {
-            font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 10px;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #2d5016 0%, #5d8b3a 100%);
-            color: white;
+            font-family: var(--font-main);
+            color: var(--color-dark-green);
+            background-color: var(--color-mid-green);
+            margin: 0;
             padding: 20px;
-            text-align: center;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        
-        .header h1 {
+
+        /* --- Access Control Section --- */
+        #access-gate {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--color-white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #access-gate h1 {
             font-size: 2rem;
             margin-bottom: 10px;
-            font-weight: bold;
+            color: var(--color-dark-green);
         }
         
-        .header p {
+        #access-gate p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        #access-gate input, #access-gate button {
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 5px;
+            font-family: var(--font-main);
             font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        /* Hamburger Menu Styles */
-        .hamburger {
-            display: none;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-        
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-        
-        .nav-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background: rgba(45, 80, 22, 0.95);
-            backdrop-filter: blur(10px);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            padding: 80px 20px 20px;
-        }
-        
-        .nav-menu.active {
-            right: 0;
-        }
-        
-        .nav-menu a {
             display: block;
-            color: white;
-            text-decoration: none;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: color 0.3s ease;
-            font-size: 16px;
+            margin: 15px auto;
         }
-        
-        .nav-menu a:hover {
-            color: #c3cfe2;
+
+        #access-gate input {
+            border: 1px solid var(--color-mid-green);
         }
-        
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .controls {
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .filter-group label {
-            font-weight: 600;
-            color: #2d5016;
-            white-space: nowrap;
-        }
-        
-        select, input {
-            padding: 8px 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        select:focus, input:focus {
-            outline: none;
-            border-color: #5d8b3a;
-            box-shadow: 0 0 0 3px rgba(93, 139, 58, 0.1);
-        }
-        
-        .export-btn {
-            background: linear-gradient(135deg, #2d5016 0%, #5d8b3a 100%);
-            color: white;
+
+        #access-gate button {
+            font-weight: 700;
+            background-color: var(--color-navy);
+            color: var(--color-white);
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            white-space: nowrap;
+            transition: background-color 0.2s ease;
         }
         
-        .export-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
+        #access-gate button:hover {
+            background-color: #000066;
         }
         
-        .table-container {
-            overflow-x: auto;
-            max-height: 70vh;
+        #message-box {
+            margin-top: 20px;
+            color: red;
         }
-        
-        table {
+
+        /* --- Passport Styles (Hidden by default) --- */
+        .passport-booklet {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            min-width: 800px;
+            max-width: 900px;
+            background-color: var(--color-white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            overflow: hidden;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .cover {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--color-dark-green);
+            color: var(--color-cream);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .cover h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .cover .subtitle {
+            font-style: italic;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            margin-top: 10px;
+        }
+
+        .cover .note {
+            font-size: 0.9rem;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .category {
+            border-bottom: 2px solid var(--color-mid-green);
+            padding-bottom: 20px;
         }
         
-        th {
-            background: linear-gradient(135deg, #2d5016 0%, #5d8b3a 100%);
-            color: white;
-            padding: 15px 12px;
-            text-align: left;
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        .category-title {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--color-mid-green);
+            padding-left: 15px;
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .book-entry {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-cream);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--color-mid-green);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none; /* Remove underline from the link */
+            color: inherit; /* Inherit the text color */
         }
         
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #e9ecef;
-            vertical-align: top;
+        .book-entry:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+
+        .book-details {
+            flex-grow: 1;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            color: var(--color-dark-green);
+        }
+
+        .book-author {
+            font-style: italic;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .book-summary {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
         }
         
-        tr:hover {
-            background-color: rgba(93, 139, 58, 0.05);
+        .rating-stars {
+            color: gold;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
         }
-        
-        .date-cell {
-            font-weight: 600;
-            color: #2d5016;
-            white-space: nowrap;
+
+        .book-review {
+            margin-top: 15px;
+            font-style: italic;
+            border-top: 1px dashed var(--color-mid-green);
+            padding-top: 15px;
+            font-size: 0.9rem;
+            color: #555;
         }
-        
-        .platform-cell {
-            font-weight: 600;
+
+        .book-review::before {
+            content: """;
+            font-size: 1.5rem;
+            line-height: 0;
+            margin-right: 5px;
+            vertical-align: sub;
         }
-        
-        .platform-instagram { color: #e4405f; }
-        .platform-twitter { color: #1da1f2; }
-        .platform-facebook { color: #1877f2; }
-        
-        .type-cell {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 4px 8px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
+
+        .shop-link {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--color-mid-green);
         }
-        
-        .type-launch { background: #e7f3ff; color: #0066cc; }
-        .type-transparency { background: #fff3cd; color: #856404; }
-        .type-book { background: #d1ecf1; color: #0c5460; }
-        .type-educational { background: #d4edda; color: #155724; }
-        .type-community { background: #f8d7da;
+
+        .shop-link a {
+            color: var(--color-navy);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border: 2px solid var(--color-navy);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .shop-link a:hover {
+            background-color: var(--color-navy);
+            color: var(--color-white);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background-color: var(--color-white);
+            }
+
+            #access-gate {
+                display: none;
+            }
+
+            .passport-booklet {
+                display: flex;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 20px;
+            }
+
+            .cover {
+                page-break-after: always;
+                border-radius: 0;
+            }
+
+            .category {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Access Gate -->
+    <div id="access-gate">
+        <h1>Luigi's Legal Fund Bookshop</h1>
+        <p>Please enter the secret key to view the exclusive reading list.</p>
+        <input type="password" id="secretKeyInput" placeholder="Enter secret key">
+        <button id="submitBtn">Enter</button>
+        <div id="message-box"></div>
+    </div>
+
+    <!-- Passport Content (Hidden by default) -->
+    <div class="passport-booklet" id="passport-content">
+
+        <!-- Passport Cover -->
+        <div class="cover">
+            <h1>Luigi's Legal Fund Bookshop</h1>
+            <p class="subtitle">Reading List</p>
+            <p class="note">All ratings and reviews are Luigi's own. Please consider purchasing your books from our Bookshop.org page to support our cause.</p>
+        </div>
+
+        <div class="content">
+
+            <!-- --- Category 1: Science & Philosophy --- -->
+            <div class="category">
+                <h2 class="category-title">Science & Philosophy</h2>
+                <div class="book-list">
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780674237544" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">The Ape that Understood the Universe: How the Mind and Culture Evolve</h3>
+                            <p class="book-author">by Steve Stewart-Williams</p>
+                            <p class="book-summary">A compelling look at human behavior through the lenses of evolutionary psychology and culture, exploring how our minds and societies have developed over time.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780385495325" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</h3>
+                            <p class="book-author">by Simon Singh</p>
+                            <p class="book-summary">An engaging history of cryptography, from ancient ciphers to modern-day encryption, revealing the secrets and mathematical principles behind codes and code-breaking.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062651204" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Dollars and Sense: How We Misthink Money and How to Spend Smarter</h3>
+                            <p class="book-author">by Dan Ariely & Jeff Kreisler</p>
+                            <p class="book-summary">This book explores the irrational ways we think about and spend money, offering practical insights and advice on how to make smarter financial decisions.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062390851" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Everybody Lies: Big Data, New Data, and What the Internet Can Tell Us About Who We Really Are</h3>
+                            <p class="book-author">by Seth Stephens-Davidowitz</p>
+                            <p class="book-summary">A fascinating investigation into what people's anonymous online search queries reveal about their true thoughts and desires, using big data to uncover surprising truths about human behavior.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780060731335" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</h3>
+                            <p class="book-author">by Steven D. Levitt & Stephen J. Dubner</p>
+                        </div>
+                        <p class="book-summary">This book applies economic principles to unconventional topics, exploring the hidden motivations behind everything from crime rates to the names people give their children.</p>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780316017930" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Outliers: The Story of Success</h3>
+                            <p class="book-author">by Malcolm Gladwell</p>
+                            <p class="book-summary">Gladwell challenges the traditional notion of success, arguing that it's often less about innate talent and more about circumstances, culture, and opportunity.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780061353246" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Predictably Irrational: The Hidden Forces That Shape Our Decisions</h3>
+                            <p class="book-author">by Dan Ariely</p>
+                            <p class="book-summary">This book reveals the systematic and predictable ways we make irrational decisions in our daily lives, from love and money to work and happiness.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062316097" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Sapiens: A Brief History of Humankind</h3>
+                            <p class="book-author">by Yuval Noah Harari</p>
+                            <p class="book-summary">A sweeping history of the human species, from our evolution as hunter-gatherers to our current status as the dominant species on Earth.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062851192" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Sapiens: A Graphic History, Volume 1 - The Birth of Humankind</h3>
+                            <p class="book-author">by David Vandermeulen & Yuval Noah Harari</p>
+                            <p class="book-summary">The first volume of a graphic novel adaptation of Harari's original work, detailing the early history of humankind in an accessible, illustrated format.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780316478526" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Talking to Strangers: What We Should Know About the People We Don't Know</h3>
+                            <p class="book-author">by Malcolm Gladwell</p>
+                            <p class="book-summary">Gladwell explores the reasons why our interactions with strangers often go wrong, using high-profile cases to examine the tools we use to make sense of people we don't know.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780593418376" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">What's Our Problem?: A Self-Help Book for Societies</h3>
+                            <p class="book-author">by Tim Urban</p>
+                            <p class="book-summary">This book uses a unique, long-form blog post style to diagnose the problems facing modern societies and offers a path forward by focusing on honest and constructive discourse.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                        <div class="book-review">I believe this book will go down in history as one of the most important philosophical texts of the early 21st century</div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/shop/legalfundbookshop" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">The AI Revolution: The Road to Superintelligence</h3>
+                            <p class="book-author">by Tim Urban</p>
+                            <p class="book-summary">A non-technical explanation of artificial intelligence, from its current state to the potential for a superintelligent future and the profound implications that would have for humanity.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/shop/legalfundbookshop" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">The Elon Musk Blog Series: Wait But Why</h3>
+                            <p class="book-author">by Tim Urban</p>
+                            <p class="book-summary">A collection of deeply researched blog posts that delve into the life and ventures of Elon Musk, providing a comprehensive overview of his companies like Tesla and SpaceX.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- --- Category 2: Memoir & Biography --- -->
+            <div class="category">
+                <h2 class="category-title">Memoir & Biography</h2>
+                <div class="book-list">
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780399588174" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Born a Crime: Stories From a South African Childhood</h3>
+                            <p class="book-author">by Trevor Noah</p>
+                            <p class="book-summary">The compelling memoir of Trevor Noah's childhood in apartheid-era South Africa, chronicling his journey from a young boy to a world-renowned comedian.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062301239" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future</h3>
+                            <p class="book-author">by Ashlee Vance</p>
+                            <p class="book-summary">The definitive biography of technology mogul Elon Musk, offering a look at his ambitious vision and the challenges he faced in building his groundbreaking companies.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062300546" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Hillbilly Elegy: A Memoir of a Family and Culture in Crisis</h3>
+                            <p class="book-author">by J.D. Vance</p>
+                            <p class="book-summary">A personal account of the social and economic problems of the white working class in Appalachia, exploring the author's own upbringing and the cycles of poverty and instability.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9781401324513" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Professional Idiot: A Memoir</h3>
+                            <p class="book-author">by Stephen "Steve-O" Glover</p>
+                            <p class="book-summary">The unfiltered memoir of Jackass star Steve-O, detailing his rise to fame, struggles with addiction, and ultimate path to recovery.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9781501135927" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Shoe Dog: A Memoir by the Creator of Nike</h3>
+                            <p class="book-author">by Phil Knight</p>
+                            <p class="book-summary">A candid memoir from Nike founder Phil Knight, recounting the company's humble beginnings and the challenges he faced building one of the world's most iconic brands.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- --- Category 3: Fantasy & Science Fiction --- -->
+            <div class="category">
+                <h2 class="category-title">Fantasy & Science Fiction</h2>
+                <div class="book-list">
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780060850524" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Brave New World</h3>
+                            <p class="book-author">by Aldous Huxley</p>
+                            <p class="book-summary">A classic dystopian novel that imagines a futuristic world where a totalitarian government controls society through conditioning, drugs, and genetic engineering to maintain stability.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780395569160" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">The Boy and the Samurai</h3>
+                            <p class="book-author">by Erik Christian Haugaard</p>
+                            <p class="book-summary">A historical fiction novel set in 16th-century Japan, following a young boy who survives a shipwreck and is taken in by a kind-hearted samurai.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars"></div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780439023498" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Catching Fire</h3>
+                            <p class="book-author">by Suzanne Collins</p>
+                            <p class="book-summary">The second book in The Hunger Games trilogy, which follows Katniss Everdeen as she grapples with the aftermath of the Hunger Games and becomes a symbol of a growing rebellion.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars"></div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780345404473" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Do Androids Dream of Electric Sheep?</h3>
+                            <p class="book-author">by Philip K. Dick</p>
+                            <p class="book-summary">The sci-fi novel that inspired Blade Runner, set in a post-apocalyptic San Francisco where a bounty hunter is tasked with "retiring" renegade androids.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780545290142" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">The Eleventh Plague</h3>
+                            <p class="book-author">by Jeff Hirsch</p>
+                            <p class="book-summary">A young adult post-apocalyptic novel that follows a teenage boy navigating a world ravaged by a plague, learning to survive and find hope in a broken society.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780812550702" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Ender's Game</h3>
+                            <p class="book-author">by Orson Scott Card</p>
+                            <p class="book-summary">A science fiction military novel where a young genius is recruited to a space academy to be trained to lead a future war against an alien race.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars"></div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780439064873" target="_blank">
