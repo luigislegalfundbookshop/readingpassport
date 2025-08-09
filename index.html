@@ -610,4 +610,20 @@
             const passportContent = document.getElementById('passport-content');
             
             if (input.value === 'luigi') {
-                accessGate.style.display = 'none
+                accessGate.style.display = 'none';
+                passportContent.style.display = 'flex';
+            } else {
+                messageBox.textContent = 'Incorrect password. Please try again.';
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('secretKeyInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
