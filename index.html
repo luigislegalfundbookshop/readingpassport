@@ -3,1016 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luigi's Legal Fund Bookshop Reading List</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <title>Luigi's Legal Fund Bookshop - Social Media Calendar</title>
     <style>
-        :root {
-            --color-cream: #e0e0e0;
-            --color-dark-green: #2c5530;
-            --color-mid-green: #739e82;
-            --color-navy: #000080;
-            --color-white: #ffffff;
-            --font-main: 'Playfair Display', serif;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--color-dark-green);
-            background-color: var(--color-mid-green);
+        * {
             margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            padding: 10px;
         }
-
-        /* --- Access Control Section --- */
-        #access-gate {
-            text-align: center;
-            padding: 40px;
-            background-color: var(--color-white);
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
-
-        #access-gate h1 {
+        
+        .header {
+            background: linear-gradient(135deg, #2d5016 0%, #5d8b3a 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
             font-size: 2rem;
             margin-bottom: 10px;
-            color: var(--color-dark-green);
+            font-weight: bold;
         }
         
-        #access-gate p {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        #access-gate input, #access-gate button {
-            padding: 10px;
-            width: 80%;
-            max-width: 300px;
-            border-radius: 5px;
-            font-family: var(--font-main);
+        .header p {
             font-size: 1rem;
-            display: block;
-            margin: 15px auto;
+            opacity: 0.9;
         }
-
-        #access-gate input {
-            border: 1px solid var(--color-mid-green);
-        }
-
-        #access-gate button {
-            font-weight: 700;
-            background-color: var(--color-navy);
-            color: var(--color-white);
-            border: none;
+        
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            flex-direction: column;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            z-index: 1000;
         }
         
-        #access-gate button:hover {
-            background-color: #000066;
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
         }
         
-        #message-box {
-            margin-top: 20px;
-            color: red;
-        }
-
-        /* --- Passport Styles (Hidden by default) --- */
-        .passport-booklet {
-            width: 100%;
-            max-width: 900px;
-            background-color: var(--color-white);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: none; /* Initially hidden */
-            flex-direction: column;
-            overflow: hidden;
-            padding: 40px;
-            line-height: 1.6;
-        }
-
-        .cover {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: var(--color-dark-green);
-            color: var(--color-cream);
-            border-radius: 10px;
-            margin-bottom: 40px;
-        }
-
-        .cover h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 700;
-            margin: 0;
-            text-transform: uppercase;
-        }
-
-        .cover .subtitle {
-            font-style: italic;
-            font-size: clamp(1rem, 4vw, 1.5rem);
-            margin-top: 10px;
-        }
-
-        .cover .note {
-            font-size: 0.9rem;
-            margin-top: 20px;
-            opacity: 0.8;
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .category {
-            border-bottom: 2px solid var(--color-mid-green);
-            padding-bottom: 20px;
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
         }
         
-        .category-title {
-            font-size: clamp(1.5rem, 5vw, 2rem);
-            font-weight: 700;
-            color: var(--color-navy);
-            margin-bottom: 20px;
-            border-left: 5px solid var(--color-mid-green);
-            padding-left: 15px;
-        }
-
-        .book-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .book-entry {
-            display: flex;
-            flex-direction: column;
-            background-color: var(--color-cream);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--color-mid-green);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none; /* Remove underline from the link */
-            color: inherit; /* Inherit the text color */
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
         }
         
-        .book-entry:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
-        }
-
-        .book-details {
-            flex-grow: 1;
-        }
-
-        .book-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 0 0 5px 0;
-            color: var(--color-dark-green);
-        }
-
-        .book-author {
-            font-style: italic;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        .book-summary {
-            font-size: 0.9rem;
-            margin-top: 10px;
-            color: #555;
-            font-style: italic;
-        }
-
-        .book-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
         
-        .rating-stars {
-            color: gold;
-            font-size: 1.1rem;
-            letter-spacing: 0.1em;
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            transition: right 0.3s ease;
+            z-index: 999;
+            padding: 80px 20px 20px;
         }
-
-        .book-review {
-            margin-top: 15px;
-            font-style: italic;
-            border-top: 1px dashed var(--color-mid-green);
-            padding-top: 15px;
-            font-size: 0.9rem;
-            color: #555;
+        
+        .nav-menu.active {
+            right: 0;
         }
-
-        .book-review::before {
-            content: "“";
-            font-size: 1.5rem;
-            line-height: 0;
-            margin-right: 5px;
-            vertical-align: sub;
-        }
-
-        .shop-link {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid var(--color-mid-green);
-        }
-
-        .shop-link a {
-            color: var(--color-navy);
-            font-weight: 700;
+        
+        .nav-menu a {
+            display: block;
+            color: white;
             text-decoration: none;
-            font-size: 1.1rem;
-            border: 2px solid var(--color-navy);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #c3cfe2;
+        }
+        
+        .controls {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: #2d5016;
+            white-space: nowrap;
+        }
+        
+        select, input {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #5d8b3a;
+            box-shadow: 0 0 0 3px rgba(93, 139, 58, 0.1);
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, #2d5016 0%, #5d8b3a 100%);
+            color: white;
+            border: none;
             padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.2s ease;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
-
-        .shop-link a:hover {
-            background-color: var(--color-navy);
-            color: var(--color-white);
+        
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
         }
-
-        @media print {
-            body {
-                padding: 0;
-                background-color: var(--color-white);
-            }
-
-            #access-gate {
-                display: none;
-            }
-
-            .passport-booklet {
-                display: flex;
-                box-shadow: none;
-                border-radius: 0;
-                padding: 20px;
-            }
-
-            .cover {
-                page-break-after: always;
-                border-radius: 0;
-            }
-
-            .category {
-                page-break-inside: avoid;
-            }
+        
+        .table-container {
+            overflow-x: auto;
+            max-height: 70vh;
         }
-    </style>
-</head>
-<body>
-
-    <!-- Access Gate -->
-    <div id="access-gate">
-        <h1>Luigi's Legal Fund Bookshop</h1>
-        <p>Please enter the secret key to view the exclusive reading list.</p>
-        <input type="password" id="secretKeyInput" placeholder="Enter secret key">
-        <button id="submitBtn">Enter</button>
-        <div id="message-box"></div>
-    </div>
-
-    <!-- Passport Content (Hidden by default) -->
-    <div class="passport-booklet" id="passport-content">
-
-        <!-- Passport Cover -->
-        <div class="cover">
-            <h1>Luigi's Legal Fund Bookshop</h1>
-            <p class="subtitle">Reading List</p>
-            <p class="note">All ratings and reviews are Luigi's own. Please consider purchasing your books from our Bookshop.org page to support our cause.</p>
-        </div>
-
-        <div class="content">
-
-            <!-- --- Category 1: Science & Philosophy --- -->
-            <div class="category">
-                <h2 class="category-title">Science & Philosophy</h2>
-                <div class="book-list">
-                    <a class="book-entry" href="https://your-website.com/book1">
-                        <div class="book-details">
-                            <h3 class="book-title">The Ape that Understood the Universe: How the Mind and Culture Evolve</h3>
-                            <p class="book-author">by Steve Stewart-Williams</p>
-                            <p class="book-summary">A compelling look at human behavior through the lenses of evolutionary psychology and culture, exploring how our minds and societies have developed over time.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book2">
-                        <div class="book-details">
-                            <h3 class="book-title">The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</h3>
-                            <p class="book-author">by Simon Singh</p>
-                            <p class="book-summary">An engaging history of cryptography, from ancient ciphers to modern-day encryption, revealing the secrets and mathematical principles behind codes and code-breaking.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book3">
-                        <div class="book-details">
-                            <h3 class="book-title">Dollars and Sense: How We Misthink Money and How to Spend Smarter</h3>
-                            <p class="book-author">by Dan Ariely & Jeff Kreisler</p>
-                            <p class="book-summary">This book explores the irrational ways we think about and spend money, offering practical insights and advice on how to make smarter financial decisions.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book4">
-                        <div class="book-details">
-                            <h3 class="book-title">Everybody Lies: Big Data, New Data, and What the Internet Can Tell Us About Who We Really Are</h3>
-                            <p class="book-author">by Seth Stephens-Davidowitz</p>
-                            <p class="book-summary">A fascinating investigation into what people's anonymous online search queries reveal about their true thoughts and desires, using big data to uncover surprising truths about human behavior.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book5">
-                        <div class="book-details">
-                            <h3 class="book-title">Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</h3>
-                            <p class="book-author">by Steven D. Levitt & Stephen J. Dubner</p>
-                        </div>
-                        <p class="book-summary">This book applies economic principles to unconventional topics, exploring the hidden motivations behind everything from crime rates to the names people give their children.</p>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book6">
-                        <div class="book-details">
-                            <h3 class="book-title">Outliers: The Story of Success</h3>
-                            <p class="book-author">by Malcolm Gladwell</p>
-                            <p class="book-summary">Gladwell challenges the traditional notion of success, arguing that it's often less about innate talent and more about circumstances, culture, and opportunity.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book7">
-                        <div class="book-details">
-                            <h3 class="book-title">Predictably Irrational: The Hidden Forces That Shape Our Decisions</h3>
-                            <p class="book-author">by Dan Ariely</p>
-                            <p class="book-summary">This book reveals the systematic and predictable ways we make irrational decisions in our daily lives, from love and money to work and happiness.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book8">
-                        <div class="book-details">
-                            <h3 class="book-title">Sapiens: A Brief History of Humankind</h3>
-                            <p class="book-author">by Yuval Noah Harari</p>
-                            <p class="book-summary">A sweeping history of the human species, from our evolution as hunter-gatherers to our current status as the dominant species on Earth.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book9">
-                        <div class="book-details">
-                            <h3 class="book-title">Sapiens: A Graphic History, Volume 1 - The Birth of Humankind</h3>
-                            <p class="book-author">by David Vandermeulen & Yuval Noah Harari</p>
-                            <p class="book-summary">The first volume of a graphic novel adaptation of Harari's original work, detailing the early history of humankind in an accessible, illustrated format.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book10">
-                        <div class="book-details">
-                            <h3 class="book-title">Talking to Strangers: What We Should Know About the People We Don't Know</h3>
-                            <p class="book-author">by Malcolm Gladwell</p>
-                            <p class="book-summary">Gladwell explores the reasons why our interactions with strangers often go wrong, using high-profile cases to examine the tools we use to make sense of people we don't know.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book11">
-                        <div class="book-details">
-                            <h3 class="book-title">What's Our Problem?: A Self-Help Book for Societies</h3>
-                            <p class="book-author">by Tim Urban</p>
-                            <p class="book-summary">This book uses a unique, long-form blog post style to diagnose the problems facing modern societies and offers a path forward by focusing on honest and constructive discourse.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                        <div class="book-review">I believe this book will go down in history as one of the most important philosophical texts of the early 21st century</div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book12">
-                        <div class="book-details">
-                            <h3 class="book-title">The AI Revolution: The Road to Superintelligence</h3>
-                            <p class="book-author">by Tim Urban</p>
-                            <p class="book-summary">A non-technical explanation of artificial intelligence, from its current state to the potential for a superintelligent future and the profound implications that would have for humanity.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book13">
-                        <div class="book-details">
-                            <h3 class="book-title">The Elon Musk Blog Series: Wait But Why</h3>
-                            <p class="book-author">by Tim Urban</p>
-                            <p class="book-summary">A collection of deeply researched blog posts that delve into the life and ventures of Elon Musk, providing a comprehensive overview of his companies like Tesla and SpaceX.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- --- Category 2: Memoir & Biography --- -->
-            <div class="category">
-                <h2 class="category-title">Memoir & Biography</h2>
-                <div class="book-list">
-                    <a class="book-entry" href="https://your-website.com/book14">
-                        <div class="book-details">
-                            <h3 class="book-title">Born a Crime: Stories From a South African Childhood</h3>
-                            <p class="book-author">by Trevor Noah</p>
-                            <p class="book-summary">The compelling memoir of Trevor Noah's childhood in apartheid-era South Africa, chronicling his journey from a young boy to a world-renowned comedian.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book15">
-                        <div class="book-details">
-                            <h3 class="book-title">Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future</h3>
-                            <p class="book-author">by Ashlee Vance</p>
-                            <p class="book-summary">The definitive biography of technology mogul Elon Musk, offering a look at his ambitious vision and the challenges he faced in building his groundbreaking companies.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book16">
-                        <div class="book-details">
-                            <h3 class="book-title">Hillbilly Elegy: A Memoir of a Family and Culture in Crisis</h3>
-                            <p class="book-author">by J.D. Vance</p>
-                            <p class="book-summary">A personal account of the social and economic problems of the white working class in Appalachia, exploring the author's own upbringing and the cycles of poverty and instability.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book17">
-                        <div class="book-details">
-                            <h3 class="book-title">Professional Idiot: A Memoir</h3>
-                            <p class="book-author">by Stephen "Steve-O" Glover</p>
-                            <p class="book-summary">The unfiltered memoir of Jackass star Steve-O, detailing his rise to fame, struggles with addiction, and ultimate path to recovery.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book18">
-                        <div class="book-details">
-                            <h3 class="book-title">Shoe Dog: A Memoir by the Creator of Nike</h3>
-                            <p class="book-author">by Phil Knight</p>
-                            <p class="book-summary">A candid memoir from Nike founder Phil Knight, recounting the company's humble beginnings and the challenges he faced building one of the world's most iconic brands.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- --- Category 3: Fantasy & Science Fiction --- -->
-            <div class="category">
-                <h2 class="category-title">Fantasy & Science Fiction</h2>
-                <div class="book-list">
-                    <a class="book-entry" href="https://your-website.com/book19">
-                        <div class="book-details">
-                            <h3 class="book-title">Brave New World</h3>
-                            <p class="book-author">by Aldous Huxley</p>
-                            <p class="book-summary">A classic dystopian novel that imagines a futuristic world where a totalitarian government controls society through conditioning, drugs, and genetic engineering to maintain stability.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book20">
-                        <div class="book-details">
-                            <h3 class="book-title">The Boy and the Samurai</h3>
-                            <p class="book-author">by Erik Christian Haugaard</p>
-                            <p class="book-summary">A historical fiction novel set in 16th-century Japan, following a young boy who survives a shipwreck and is taken in by a kind-hearted samurai.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book21">
-                        <div class="book-details">
-                            <h3 class="book-title">Catching Fire</h3>
-                            <p class="book-author">by Suzanne Collins</p>
-                            <p class="book-summary">The second book in The Hunger Games trilogy, which follows Katniss Everdeen as she grapples with the aftermath of the Hunger Games and becomes a symbol of a growing rebellion.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book22">
-                        <div class="book-details">
-                            <h3 class="book-title">Do Androids Dream of Electric Sheep?</h3>
-                            <p class="book-author">by Philip K. Dick</p>
-                            <p class="book-summary">The sci-fi novel that inspired Blade Runner, set in a post-apocalyptic San Francisco where a bounty hunter is tasked with "retiring" renegade androids.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book23">
-                        <div class="book-details">
-                            <h3 class="book-title">The Eleventh Plague</h3>
-                            <p class="book-author">by Jeff Hirsch</p>
-                            <p class="book-summary">A young adult post-apocalyptic novel that follows a teenage boy navigating a world ravaged by a plague, learning to survive and find hope in a broken society.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book24">
-                        <div class="book-details">
-                            <h3 class="book-title">Ender's Game</h3>
-                            <p class="book-author">by Orson Scott Card</p>
-                            <p class="book-summary">A science fiction military novel where a young genius is recruited to a space academy to be trained to lead a future war against an alien race.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book25">
-                        <div class="book-details">
-                            <h3 class="book-title">Harry Potter and the Chamber of Secrets</h3>
-                            <p class="book-author">by J.K. Rowling</p>
-                            <p class="book-summary">The second book in the Harry Potter series, following Harry as a mysterious power terrorizes the students of Hogwarts and uncovers a dangerous secret within the castle walls.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book26">
-                        <div class="book-details">
-                            <h3 class="book-title">Harry Potter and the Prisoner of Azkaban</h3>
-                            <p class="book-author">by J.K. Rowling</p>
-                            <p class="book-summary">The third book in the Harry Potter series, where Harry learns that a dangerous criminal named Sirius Black has escaped from prison and is on the loose, seeking to harm him.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book27">
-                        <div class="book-details">
-                            <h3 class="book-title">Harry Potter and the Sorcerer's Stone</h3>
-                            <p class="book-author">by J.K. Rowling</p>
-                            <p class="book-summary">The first book in the Harry Potter series, introducing the young wizard Harry as he discovers his magical heritage and begins his first year at Hogwarts School of Witchcraft and Wizardry.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book28">
-                        <div class="book-details">
-                            <h3 class="book-title">The Hitchhiker’s Guide to the Galaxy</h3>
-                            <p class="book-author">by Douglas Adams</p>
-                            <p class="book-summary">A comedic science fiction series that follows the misadventures of the last surviving human as he travels across the galaxy after Earth is destroyed to make way for an intergalactic highway.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book29">
-                        <div class="book-details">
-                            <h3 class="book-title">The Hobbit, or There and Back Again</h3>
-                            <p class="book-author">by J.R.R. Tolkien</p>
-                            <p class="book-summary">A classic fantasy novel about Bilbo Baggins, a hobbit who is recruited by a wizard and a company of dwarves to help them reclaim their treasure from a dragon.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book30">
-                        <div class="book-details">
-                            <h3 class="book-title">The Hunger Games</h3>
-                            <p class="book-author">by Suzanne Collins</p>
-                            <p class="book-summary">The first book of a dystopian trilogy where a teenage girl is forced to participate in a televised fight to the death as a part of a cruel annual event.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book31">
-                        <div class="book-details">
-                            <h3 class="book-title">The Little Prince</h3>
-                            <p class="book-author">by Antoine de Saint-Exupéry</p>
-                            <p class="book-summary">A philosophical fable that tells the story of a pilot stranded in the desert who meets a young prince from a distant asteroid and learns profound lessons about life, love, and humanity.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book32">
-                        <div class="book-details">
-                            <h3 class="book-title">The Martian</h3>
-                            <p class="book-author">by Andy Weir</p>
-                            <p class="book-summary">The story of an astronaut stranded on Mars who must use his scientific knowledge and resourcefulness to survive alone on the hostile planet while waiting for rescue.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book33">
-                        <div class="book-details">
-                            <h3 class="book-title">Mockingjay</h3>
-                            <p class="book-author">by Suzanne Collins</p>
-                            <p class="book-summary">The final book in The Hunger Games trilogy, which sees Katniss Everdeen leading the districts of Panem in an all-out rebellion against the oppressive Capitol.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book34">
-                        <div class="book-details">
-                            <h3 class="book-title">The Promise</h3>
-                            <p class="book-author">by Gene Luen Yang, Michael Dante DiMartino, Bryan Konietzko</p>
-                            <p class="book-summary">A graphic novel series that continues the story of the Avatar: The Last Airbender animated series, exploring the challenges of restoring balance to the world after the war has ended.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book35">
-                        <div class="book-details">
-                            <h3 class="book-title">The Ruins of Gorlan</h3>
-                            <p class="book-author">by John Flanagan</p>
-                            <p class="book-summary">The first book in the Ranger's Apprentice series, following a young boy who is taken on as an apprentice by a legendary Ranger, a master of stealth and weaponry.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book36">
-                        <div class="book-details">
-                            <h3 class="book-title">Speaker for the Dead</h3>
-                            <p class="book-author">by Orson Scott Card</p>
-                            <p class="book-summary">The sequel to Ender's Game, where Ender Wiggin takes on the role of a "Speaker for the Dead," a historical chronicler, and is called to a distant planet to investigate a mysterious alien species.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book37">
-                        <div class="book-details">
-                            <h3 class="book-title">Wool Omnibus</h3>
-                            <p class="book-author">by Hugh Howey</p>
-                            <p class="book-summary">A collection of interconnected novellas set in a post-apocalyptic future where humanity lives in a giant underground silo, with a mystery surrounding the outside world.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book38">
-                        <div class="book-details">
-                            <h3 class="book-title">Xenocide</h3>
-                            <p class="book-author">by Orson Scott Card</p>
-                            <p class="book-summary">The third book in the Ender's Game series, which follows Ender as he faces new threats, including a dangerous virus and the complexities of his past actions.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- --- Category 4: Health & Self-Improvement --- -->
-            <div class="category">
-                <h2 class="category-title">Health & Self-Improvement</h2>
-                <div class="book-list">
-                    <a class="book-entry" href="https://your-website.com/book39">
-                        <div class="book-details">
-                            <h3 class="book-title">The 4-Hour Workweek</h3>
-                            <p class="book-author">by Timothy Ferriss</p>
-                            <p class="book-summary">A guide to modern lifestyle design, offering strategies to escape the traditional 9-to-5 job and create a life of financial freedom and travel.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book40">
-                        <div class="book-details">
-                            <h3 class="book-title">Back Mechanic</h3>
-                            <p class="book-author">by Stuart McGill</p>
-                            <p class="book-summary">A practical guide to understanding and fixing back pain, providing exercises and strategies for diagnosing and rehabilitating spinal issues.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book41">
-                        <div class="book-details">
-                            <h3 class="book-title">Becoming a Supple Leopard: The Ultimate Guide to Resolving Pain, Preventing Injury, and Optimizing Athletic Performance</h3>
-                            <p class="book-author">by Kelly Starrett</p>
-                            <p class="book-summary">A comprehensive guide for athletes and fitness enthusiasts on how to improve mobility, prevent injury, and optimize performance through proper movement and mechanics.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book42">
-                        <div class="book-details">
-                            <h3 class="book-title">Bigger Leaner Stronger: The Simple Science of Building the Ultimate Male Body</h3>
-                            <p class="book-author">by Michael Matthews</p>
-                            <p class="book-summary">A straightforward and science-based guide to building muscle and losing fat, providing a no-nonsense approach to fitness and nutrition for men.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book43">
-                        <div class="book-details">
-                            <h3 class="book-title">Crooked: Outwitting the Back Pain Industry and Getting on the Road to Recovery</h3>
-                            <p class="book-author">by Cathryn Jakobson Ramin</p>
-                            <p class="book-summary">An investigative look into the back pain industry, exposing the questionable practices and offering a guide to finding effective and lasting relief.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book44">
-                        <div class="book-details">
-                            <h3 class="book-title">Grit: The Power of Passion and Perseverance</h3>
-                            <p class="book-author">by Angela Duckworth</p>
-                            <p class="book-summary">This book argues that the key to outstanding achievement is not talent but a special blend of passion and persistence, known as "grit."</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book45">
-                        <div class="book-details">
-                            <h3 class="book-title">How to Break Up with Your Phone: The 30-Day Plan to Take Back Your Life</h3>
-                            <p class="book-author">by Catherine Price</p>
-                            <p class="book-summary">A practical guide that provides a 30-day plan to help you re-evaluate your relationship with your smartphone and reclaim your time and attention.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book46">
-                        <div class="book-details">
-                            <h3 class="book-title">How Not to Die: Discover the Foods Scientifically Proven to Prevent and Reverse Disease</h3>
-                            <p class="book-author">by Michael Greger</p>
-                            <p class="book-summary">A book that explores the science behind plant-based eating and provides evidence-based recommendations on how diet can prevent and reverse many common diseases.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book47">
-                        <div class="book-details">
-                            <h3 class="book-title">The Paleo Diet Revised: Lose Weight and Get Healthy by Eating the Foods You Were Designed to Eat</h3>
-                            <p class="book-author">by Loren Cordain</p>
-                            <p class="book-summary">This book outlines the principles of the Paleo diet, advocating for a diet based on foods our hunter-gatherer ancestors would have eaten.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book48">
-                        <div class="book-details">
-                            <h3 class="book-title">Why We Sleep: Unlocking the Power of Sleep and Dreams</h3>
-                            <p class="book-author">by Matthew Walker</p>
-                            <p class="book-summary">A comprehensive exploration of the science of sleep, revealing its critical role in our physical and mental health and offering practical advice for improving your sleep.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- --- Category 5: Other --- -->
-            <div class="category">
-                <h2 class="category-title">Miscellaneous</h2>
-                <div class="book-list">
-                    <a class="book-entry" href="https://your-website.com/book49">
-                        <div class="book-details">
-                            <h3 class="book-title">The Bullet Journal Method: Track Your Past, Order Your Present, Plan Your Future</h3>
-                            <p class="book-author">by Ryder Carroll</p>
-                            <p class="book-summary">A guide to the Bullet Journal system, a customizable method for organizing your to-do lists, notes, and goals using a simple notebook and pen.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book50">
-                        <div class="book-details">
-                            <h3 class="book-title">Can't Hurt Me: Master Your Mind and Defy the Odds</h3>
-                            <p class="book-author">by David Goggins</p>
-                            <p class="book-summary">The story of David Goggins's transformation from an overweight, depressed young man to a world-class endurance athlete, emphasizing the power of the mind to overcome adversity.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book51">
-                        <div class="book-details">
-                            <h3 class="book-title">Hawaii - The Big Island Revealed: The Ultimate Guidebook</h3>
-                            <p class="book-author">by Andrew Doughty</p>
-                            <p class="book-summary">A detailed and practical guidebook for travelers to the Big Island of Hawaii, providing information on attractions, activities, and local tips.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book52">
-                        <div class="book-details">
-                            <h3 class="book-title">Introduction to Algorithms</h3>
-                            <p class="book-author">by Thomas H. Cormen</p>
-                            <p class="book-summary">A widely-used textbook that provides a comprehensive and rigorous introduction to algorithms, covering their design, analysis, and implementation.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book53">
-                        <div class="book-details">
-                            <h3 class="book-title">The Lorax</h3>
-                            <p class="book-author">by Dr. Seuss</p>
-                            <p class="book-summary">A classic children's book that serves as an allegory for environmentalism, telling the story of a creature who speaks for the trees and warns against industrial exploitation.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book54">
-                        <div class="book-details">
-                            <h3 class="book-title">Maui Revealed: The Ultimate Guidebook</h3>
-                            <p class="book-author">by Andrew Doughty</p>
-                            <p class="book-summary">A popular guidebook for visitors to Maui, offering insider tips and detailed information on the island's best beaches, hikes, restaurants, and sights.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book55">
-                        <div class="book-details">
-                            <h3 class="book-title">Moo's Law: An Investor’s Guide to the New Agrarian Revolution</h3>
-                            <p class="book-author">by Jim Mellon</p>
-                            <p class="book-summary">This book explores the future of food technology and agriculture, focusing on the potential of cellular agriculture and plant-based foods to disrupt the traditional meat industry.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book56">
-                        <div class="book-details">
-                            <h3 class="book-title">Objective-C Programming: The Big Nerd Ranch Guide</h3>
-                            <p class="book-author">by Aaron Hillegass</p>
-                            <p class="book-summary">A practical programming guide that teaches the fundamentals of Objective-C, the language used for iOS and macOS development.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://your-website.com/book57">
-                        <div class="book-details">
-                            <h3 class="book-title">Spelunky</h3>
-                            <p class="book-author">by Derek Yu</p>
-                            <p class="book-summary">The book explores the design philosophy and creative process behind the beloved video game Spelunky, detailing its development and impact on the roguelike genre.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Link to Bookshop.org -->
-            <div class="shop-link">
-                <a href="https://bookshop.org/shop/legalfundbookshop" target="_blank">Luigi's Legal Fund Bookshop powered by Bookshop.org</a>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const secretCode = 'luigifan'; // Change this to your desired secret code
-            const urlParams = new URLSearchParams(window.location.search);
-            const accessKey = urlParams.get('key');
-
-            const accessGate = document.getElementById('access-gate');
-            const passportContent = document.getElementById('passport-content');
-            const secretKeyInput = document.getElementById('secretKeyInput');
-            const submitBtn = document.getElementById('submitBtn');
-            const messageBox = document.getElementById('message-box');
-
-            function showPassport() {
-                accessGate.style.display = 'none';
-                passportContent.style.display = 'flex';
-            }
-
-            function showMessage(message, isError = true) {
-                messageBox.textContent = message;
-                messageBox.style.color = isError ? 'red' : 'green';
-            }
-
-            // Check for key in the URL
-            if (accessKey === secretCode) {
-                showPassport();
-            } else {
-                // If not in URL, show the password input
-                accessGate.style.display = 'flex';
-
-                submitBtn.addEventListener('click', function() {
-                    if (secretKeyInput.value === secretCode) {
-                        showPassport();
-                    } else {
-                        showMessage('Incorrect key. Please try again.');
-                    }
-                });
-
-                // Allow pressing Enter to submit
-                secretKeyInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        submitBtn.click();
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 800px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #2d5016 0%, #5d8b3a 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background-color: rgba(93, 139, 58, 0.05);
+        }
+        
+        .date-cell {
+            font-weight: 600;
+            color: #2d5016;
+            white-space: nowrap;
+        }
+        
+        .platform-cell {
+            font-weight: 600;
+        }
+        
+        .platform-instagram { color: #e4405f; }
+        .platform-twitter { color: #1da1f2; }
+        .platform-facebook { color: #1877f2; }
+        
+        .type-cell {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .type-launch { background: #e7f3ff; color: #0066cc; }
+        .type-transparency { background: #fff3cd; color: #856404; }
+        .type-book { background: #d1ecf1; color: #0c5460; }
+        .type-educational { background: #d4edda; color: #155724; }
+        .type-community { background: #f8d7da; color: #721c24; }
+        .type-motivational { background: #e2e3e5; color: #383d41; }
+        
+        .copy-cell {
+            max-width: 300px;
+            line-height: 1.4;
+        }
+        
+        .book-recommendation {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .book-cover {
+            width: 80px;
+            height: 120px;
+            object
