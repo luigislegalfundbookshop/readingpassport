@@ -214,8 +214,8 @@
             border: 1px solid var(--color-mid-green);
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none; /* Remove underline from the link */
-            color: inherit; /* Inherit the text color */
+            text-decoration: none;
+            color: inherit;
         }
         
         .book-entry:hover {
@@ -600,28 +600,51 @@
                             <input type="checkbox" class="book-checkbox" data-book="brave-new-world" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780395569160" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">The Boy and the Samurai</h3>
-                            <p class="book-author">by Erik Christian Haugaard</p>
-                            <p class="book-summary">A historical fiction novel set in 16th-century Japan, following a young boy who survives a shipwreck and is taken in by a kind-hearted samurai.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" class="book-checkbox" data-book="boy-samurai" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780439023498" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">Catching Fire</h3>
-                            <p class="book-author">by Suzanne Collins</p>
-                            <p class="book-summary">The second book in The Hunger Games trilogy, which follows Katniss Everdeen as she grapples with the aftermath of the Hunger Games and becomes a symbol of a growing rebellion.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" class="book-checkbox" data-book="catching-fire" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780345404473" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Do Androids Dream of Electric Sheep?
+                            <h3 class="book-title">Do Androids Dream of Electric Sheep?</h3>
+                            <p class="book-author">by Philip K. Dick</p>
+                            <p class="book-summary">A science fiction classic that explores what it means to be human in a world where androids are nearly indistinguishable from people.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" class="book-checkbox" data-book="electric-sheep" onclick="updateProgress()" aria-label="Mark as read">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Shop Link -->
+            <div class="shop-link">
+                <a href="https://bookshop.org/shop/legalfundbookshop" target="_blank">Visit Our Bookshop.org Store</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Valid access codes
+        const validCodes = [
+            "defendtheinnocent",
+            "justiceserved",
+            "legaldefense",
+            "courtofpublic",
+            "verdictpending",
+            "presumedinnocent",
+            "dueprocess",
+            "habeascorpus",
+            "proceedingswithcaution",
+            "objectionoverruled",
+            "vivelarevolution",
+            "powertothepeople",
+            "fightthesystem",
+            "resistanceisnotfutile",
+            "overthrowthetyrants",
+            "freedomfighter",
+            "rebellionrising",
+            "dowiththeoppressors",
+            "libertyordeath",
+            "revolutionarytimes",
+            "healthcareforall",
+            "medicaljustice",
+            
