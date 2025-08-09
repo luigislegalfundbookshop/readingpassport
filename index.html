@@ -27,7 +27,6 @@
             min-height: 100vh;
         }
 
-        /* --- Access Control Section --- */
         #access-gate {
             text-align: center;
             padding: 40px;
@@ -83,7 +82,6 @@
             color: red;
         }
 
-        /* --- User Welcome Section --- */
         #user-welcome {
             position: fixed;
             top: 20px;
@@ -112,7 +110,6 @@
             color: var(--color-dark-green);
         }
 
-        /* --- Progress Bar --- */
         #progress-section {
             background-color: var(--color-cream);
             padding: 20px;
@@ -137,14 +134,13 @@
             transition: width 0.3s ease;
         }
 
-        /* --- Passport Styles (Hidden by default) --- */
         .passport-booklet {
             width: 100%;
             max-width: 900px;
             background-color: var(--color-white);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: none; /* Initially hidden */
+            display: none;
             flex-direction: column;
             overflow: hidden;
             padding: 40px;
@@ -300,49 +296,19 @@
             color: var(--color-white);
         }
 
-        /* Checkbox styling */
         .book-checkbox {
             transform: scale(1.2);
             cursor: pointer;
-        }
-
-        @media print {
-            body {
-                padding: 0;
-                background-color: var(--color-white);
-            }
-
-            #access-gate, #user-welcome {
-                display: none;
-            }
-
-            .passport-booklet {
-                display: flex;
-                box-shadow: none;
-                border-radius: 0;
-                padding: 20px;
-            }
-
-            .cover {
-                page-break-after: always;
-                border-radius: 0;
-            }
-
-            .category {
-                page-break-inside: avoid;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- User Welcome (Hidden by default) -->
     <div id="user-welcome" style="display: none;">
         <span id="welcome-text">Welcome, User!</span>
         <button id="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <!-- Access Gate -->
     <div id="access-gate">
         <h1>Luigi's Legal Fund Bookshop</h1>
         <p>Please enter your unique access code to view the exclusive reading list.</p>
@@ -351,19 +317,15 @@
         <div id="message-box"></div>
     </div>
 
-    <!-- Passport Content (Hidden by default) -->
     <div class="passport-booklet" id="passport-content">
-
-        <!-- Progress Section -->
         <div id="progress-section">
             <h3>Your Reading Progress</h3>
             <div id="progress-bar">
                 <div id="progress-fill"></div>
             </div>
-            <p id="progress-text">0 of 0 books completed (0%)</p>
+            <p id="progress-text">0 of 20 books completed (0%)</p>
         </div>
 
-        <!-- Passport Cover -->
         <div class="cover">
             <h1>Luigi's Legal Fund Bookshop</h1>
             <p class="subtitle">Reading List</p>
@@ -371,16 +333,14 @@
         </div>
 
         <div class="content">
-
-            <!-- --- Category 1: Science & Philosophy --- -->
             <div class="category">
                 <h2 class="category-title">Science & Philosophy</h2>
                 <div class="book-list">
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780674237544" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">The Ape that Understood the Universe: How the Mind and Culture Evolve</h3>
+                            <h3 class="book-title">The Ape that Understood the Universe</h3>
                             <p class="book-author">by Steve Stewart-Williams</p>
-                            <p class="book-summary">A compelling look at human behavior through the lenses of evolutionary psychology and culture, exploring how our minds and societies have developed over time.</p>
+                            <p class="book-summary">A compelling look at human behavior through evolutionary psychology and culture.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
@@ -389,9 +349,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780385495325" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</h3>
+                            <h3 class="book-title">The Code Book</h3>
                             <p class="book-author">by Simon Singh</p>
-                            <p class="book-summary">An engaging history of cryptography, from ancient ciphers to modern-day encryption, revealing the secrets and mathematical principles behind codes and code-breaking.</p>
+                            <p class="book-summary">An engaging history of cryptography from ancient ciphers to quantum encryption.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
@@ -400,9 +360,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062651204" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Dollars and Sense: How We Misthink Money and How to Spend Smarter</h3>
+                            <h3 class="book-title">Dollars and Sense</h3>
                             <p class="book-author">by Dan Ariely & Jeff Kreisler</p>
-                            <p class="book-summary">This book explores the irrational ways we think about and spend money, offering practical insights and advice on how to make smarter financial decisions.</p>
+                            <p class="book-summary">How we misthink money and how to spend smarter.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
@@ -411,9 +371,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062390851" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Everybody Lies: Big Data, New Data, and What the Internet Can Tell Us About Who We Really Are</h3>
+                            <h3 class="book-title">Everybody Lies</h3>
                             <p class="book-author">by Seth Stephens-Davidowitz</p>
-                            <p class="book-summary">A fascinating investigation into what people's anonymous online search queries reveal about their true thoughts and desires, using big data to uncover surprising truths about human behavior.</p>
+                            <p class="book-summary">What the Internet reveals about who we really are.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
@@ -422,9 +382,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780060731335" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</h3>
+                            <h3 class="book-title">Freakonomics</h3>
                             <p class="book-author">by Steven D. Levitt & Stephen J. Dubner</p>
-                            <p class="book-summary">This book applies economic principles to unconventional topics, exploring the hidden motivations behind everything from crime rates to the names people give their children.</p>
+                            <p class="book-summary">A rogue economist explores the hidden side of everything.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
@@ -433,9 +393,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780316017930" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Outliers: The Story of Success</h3>
+                            <h3 class="book-title">Outliers</h3>
                             <p class="book-author">by Malcolm Gladwell</p>
-                            <p class="book-summary">Gladwell challenges the traditional notion of success, arguing that it's often less about innate talent and more about circumstances, culture, and opportunity.</p>
+                            <p class="book-summary">The story of success and what makes high-achievers different.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
@@ -444,9 +404,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780061353246" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Predictably Irrational: The Hidden Forces That Shape Our Decisions</h3>
+                            <h3 class="book-title">Predictably Irrational</h3>
                             <p class="book-author">by Dan Ariely</p>
-                            <p class="book-summary">This book reveals the systematic and predictable ways we make irrational decisions in our daily lives, from love and money to work and happiness.</p>
+                            <p class="book-summary">The hidden forces that shape our decisions.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
@@ -455,42 +415,20 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062316097" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Sapiens: A Brief History of Humankind</h3>
+                            <h3 class="book-title">Sapiens</h3>
                             <p class="book-author">by Yuval Noah Harari</p>
-                            <p class="book-summary">A sweeping history of the human species, from our evolution as hunter-gatherers to our current status as the dominant species on Earth.</p>
+                            <p class="book-summary">A brief history of humankind.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
                             <input type="checkbox" class="book-checkbox" data-book="sapiens" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780062851192" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">Sapiens: A Graphic History, Volume 1 - The Birth of Humankind</h3>
-                            <p class="book-author">by David Vandermeulen & Yuval Noah Harari</p>
-                            <p class="book-summary">The first volume of a graphic novel adaptation of Harari's original work, detailing the early history of humankind in an accessible, illustrated format.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="sapiens-graphic" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780316478526" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">Talking to Strangers: What We Should Know About the People We Don't Know</h3>
-                            <p class="book-author">by Malcolm Gladwell</p>
-                            <p class="book-summary">Gladwell explores the reasons why our interactions with strangers often go wrong, using high-profile cases to examine the tools we use to make sense of people we don't know.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="talking-strangers" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780593418376" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">What's Our Problem?: A Self-Help Book for Societies</h3>
+                            <h3 class="book-title">What's Our Problem?</h3>
                             <p class="book-author">by Tim Urban</p>
-                            <p class="book-summary">This book uses a unique, long-form blog post style to diagnose the problems facing modern societies and offers a path forward by focusing on honest and constructive discourse.</p>
+                            <p class="book-summary">A self-help book for societies.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
@@ -498,40 +436,17 @@
                         </div>
                         <div class="book-review">I believe this book will go down in history as one of the most important philosophical texts of the early 21st century</div>
                     </a>
-                    <a class="book-entry" href="https://bookshop.org/shop/legalfundbookshop" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">The AI Revolution: The Road to Superintelligence</h3>
-                            <p class="book-author">by Tim Urban</p>
-                            <p class="book-summary">A non-technical explanation of artificial intelligence, from its current state to the potential for a superintelligent future and the profound implications that would have for humanity.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="ai-revolution" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/shop/legalfundbookshop" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">The Elon Musk Blog Series: Wait But Why</h3>
-                            <p class="book-author">by Tim Urban</p>
-                            <p class="book-summary">A collection of deeply researched blog posts that delve into the life and ventures of Elon Musk, providing a comprehensive overview of his companies like Tesla and SpaceX.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="elon-musk-series" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
                 </div>
             </div>
             
-            <!-- --- Category 2: Memoir & Biography --- -->
             <div class="category">
                 <h2 class="category-title">Memoir & Biography</h2>
                 <div class="book-list">
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780399588174" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Born a Crime: Stories From a South African Childhood</h3>
+                            <h3 class="book-title">Born a Crime</h3>
                             <p class="book-author">by Trevor Noah</p>
-                            <p class="book-summary">The compelling memoir of Trevor Noah's childhood in apartheid-era South Africa, chronicling his journey from a young boy to a world-renowned comedian.</p>
+                            <p class="book-summary">Stories from a South African childhood.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
@@ -540,9 +455,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062301239" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future</h3>
+                            <h3 class="book-title">Elon Musk</h3>
                             <p class="book-author">by Ashlee Vance</p>
-                            <p class="book-summary">The definitive biography of technology mogul Elon Musk, offering a look at his ambitious vision and the challenges he faced in building his groundbreaking companies.</p>
+                            <p class="book-summary">Tesla, SpaceX, and the quest for a fantastic future.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
@@ -551,9 +466,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062300546" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Hillbilly Elegy: A Memoir of a Family and Culture in Crisis</h3>
+                            <h3 class="book-title">Hillbilly Elegy</h3>
                             <p class="book-author">by J.D. Vance</p>
-                            <p class="book-summary">A personal account of the social and economic problems of the white working class in Appalachia, exploring the author's own upbringing and the cycles of poverty and instability.</p>
+                            <p class="book-summary">A memoir of a family and culture in crisis.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
@@ -562,9 +477,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9781401324513" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Professional Idiot: A Memoir</h3>
+                            <h3 class="book-title">Professional Idiot</h3>
                             <p class="book-author">by Stephen "Steve-O" Glover</p>
-                            <p class="book-summary">The unfiltered memoir of Jackass star Steve-O, detailing his rise to fame, struggles with addiction, and ultimate path to recovery.</p>
+                            <p class="book-summary">A memoir from the Jackass star.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
@@ -573,9 +488,9 @@
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9781501135927" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Shoe Dog: A Memoir by the Creator of Nike</h3>
+                            <h3 class="book-title">Shoe Dog</h3>
                             <p class="book-author">by Phil Knight</p>
-                            <p class="book-summary">A candid memoir from Nike founder Phil Knight, recounting the company's humble beginnings and the challenges he faced building one of the world's most iconic brands.</p>
+                            <p class="book-summary">A memoir by the creator of Nike.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
@@ -585,15 +500,14 @@
                 </div>
             </div>
 
-            <!-- --- Category 3: Fantasy & Science Fiction --- -->
             <div class="category">
-                <h2 class="category-title">Fantasy & Science Fiction</h2>
+                <h2 class="category-title">Fiction</h2>
                 <div class="book-list">
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780060850524" target="_blank">
                         <div class="book-details">
                             <h3 class="book-title">Brave New World</h3>
                             <p class="book-author">by Aldous Huxley</p>
-                            <p class="book-summary">A classic dystopian novel that imagines a futuristic world where a totalitarian government controls society through conditioning, drugs, and genetic engineering to maintain stability.</p>
+                            <p class="book-summary">A classic dystopian novel about a controlled society.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
@@ -604,46 +518,126 @@
                         <div class="book-details">
                             <h3 class="book-title">Do Androids Dream of Electric Sheep?</h3>
                             <p class="book-author">by Philip K. Dick</p>
-                            <p class="book-summary">A science fiction classic that explores what it means to be human in a world where androids are nearly indistinguishable from people.</p>
+                            <p class="book-summary">A sci-fi classic exploring what it means to be human.</p>
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
                             <input type="checkbox" class="book-checkbox" data-book="electric-sheep" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780451524935" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">1984</h3>
+                            <p class="book-author">by George Orwell</p>
+                            <p class="book-summary">The ultimate dystopian novel about surveillance and control.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" class="book-checkbox" data-book="1984" onclick="updateProgress()" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780486284736" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Animal Farm</h3>
+                            <p class="book-author">by George Orwell</p>
+                            <p class="book-summary">A political allegory about revolution and corruption.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" class="book-checkbox" data-book="animal-farm" onclick="updateProgress()" aria-label="Mark as read">
+                        </div>
+                    </a>
+                    <a class="book-entry" href="https://bookshop.org/a/95482/9780553213690" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Fahrenheit 451</h3>
+                            <p class="book-author">by Ray Bradbury</p>
+                            <p class="book-summary">A dystopian future where books are banned and burned.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★</div>
+                            <input type="checkbox" class="book-checkbox" data-book="fahrenheit-451" onclick="updateProgress()" aria-label="Mark as read">
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- Shop Link -->
             <div class="shop-link">
                 <a href="https://bookshop.org/shop/legalfundbookshop" target="_blank">Visit Our Bookshop.org Store</a>
             </div>
-
         </div>
     </div>
 
     <script>
-        // Valid access codes - all 50 working codes
+        // All 50 valid access codes
         const validCodes = [
-            "defendtheinnocent",
-            "justiceserved",
-            "legaldefense",
-            "courtofpublic",
-            "verdictpending",
-            "presumedinnocent",
-            "dueprocess",
-            "habeascorpus",
-            "proceedingswithcaution",
-            "objectionoverruled",
-            "vivelarevolution",
-            "powertothepeople",
-            "fightthesystem",
-            "resistanceisnotfutile",
-            "overthrowthetyrants",
-            "freedomfighter",
-            "rebellionrising",
-            "dowiththeoppressors",
-            "libertyordeath",
-            "revolutionarytimes",
-            "healthcareforall",
-            "medicaljust
+            "defendtheinnocent", "justiceserved", "legaldefense", "courtofpublic", "verdictpending",
+            "presumedinnocent", "dueprocess", "habeascorpus", "proceedingswithcaution", "objectionoverruled",
+            "vivelarevolution", "powertothepeople", "fightthesystem", "resistanceisnotfutile", "overthrowthetyrants",
+            "freedomfighter", "rebellionrising", "dowiththeoppressors", "libertyordeath", "revolutionarytimes",
+            "healthcareforall", "medicaljustice", "universalcoverage", "patientrights", "healthequity",
+            "accessiblecare", "affordablemedicine", "publichealth", "healthcarereform", "medicalfreedom",
+            "corporategreed", "wallstreetcorruption", "executiveexcess", "profitoverpeople", "systemicinjustice",
+            "wealthinequality", "classwarfare", "economicjustice", "socialjustice", "workersrights",
+            "laborunion", "collectivebargaining", "livingwage", "fairpay", "workersunite",
+            "solidarity", "peoplepower", "grassrootsmovement", "changeiscoming", "hopeandjustice"
+        ];
+
+        // Check password function
+        function checkPassword() {
+            const input = document.getElementById('secretKeyInput').value.toLowerCase().trim();
+            const messageBox = document.getElementById('message-box');
+            
+            if (validCodes.includes(input)) {
+                // Hide access gate
+                document.getElementById('access-gate').style.display = 'none';
+                // Show passport content
+                document.getElementById('passport-content').style.display = 'flex';
+                // Show user welcome
+                document.getElementById('user-welcome').style.display = 'block';
+                // Update welcome text
+                document.getElementById('welcome-text').textContent = `Welcome, ${input}!`;
+                // Change body layout
+                document.body.style.alignItems = 'flex-start';
+                document.body.style.justifyContent = 'flex-start';
+                // Initialize progress
+                updateProgress();
+            } else {
+                messageBox.textContent = 'Invalid access code. Please try again.';
+                messageBox.style.color = 'red';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById('access-gate').style.display = 'block';
+            document.getElementById('passport-content').style.display = 'none';
+            document.getElementById('user-welcome').style.display = 'none';
+            document.getElementById('secretKeyInput').value = '';
+            document.getElementById('message-box').textContent = '';
+            document.body.style.alignItems = 'center';
+            document.body.style.justifyContent = 'center';
+        }
+
+        // Update progress function
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.book-checkbox');
+            const checkedBoxes = document.querySelectorAll('.book-checkbox:checked');
+            const totalBooks = checkboxes.length;
+            const completedBooks = checkedBoxes.length;
+            const percentage = totalBooks > 0 ? Math.round((completedBooks / totalBooks) * 100) : 0;
+            
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = 
+                `${completedBooks} of ${totalBooks} books completed (${percentage}%)`;
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('secretKeyInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
