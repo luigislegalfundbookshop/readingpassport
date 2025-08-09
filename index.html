@@ -197,21 +197,21 @@
 
         .book-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
 
         .book-entry {
             display: flex;
-            flex-direction: column;
             background-color: var(--color-cream);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             border: 1px solid var(--color-mid-green);
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-decoration: none;
             color: inherit;
+            gap: 15px;
         }
         
         .book-entry:hover {
@@ -219,28 +219,46 @@
             box-shadow: 0 6px 10px rgba(0,0,0,0.1);
         }
 
+        .book-cover {
+            flex-shrink: 0;
+            width: 80px;
+            height: 120px;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
         .book-details {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .book-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             margin: 0 0 5px 0;
             color: var(--color-dark-green);
+            line-height: 1.3;
         }
 
         .book-author {
             font-style: italic;
-            margin: 0;
-            font-size: 0.9rem;
+            margin: 0 0 8px 0;
+            font-size: 0.85rem;
         }
 
         .book-summary {
-            font-size: 0.9rem;
-            margin-top: 10px;
+            font-size: 0.85rem;
+            margin-top: auto;
             color: #555;
             font-style: italic;
+            line-height: 1.4;
         }
 
         .book-meta {
@@ -252,24 +270,25 @@
         
         .rating-stars {
             color: gold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             letter-spacing: 0.1em;
         }
 
         .book-review {
-            margin-top: 15px;
+            margin-top: 10px;
             font-style: italic;
             border-top: 1px dashed var(--color-mid-green);
-            padding-top: 15px;
-            font-size: 0.9rem;
+            padding-top: 10px;
+            font-size: 0.85rem;
             color: #555;
+            line-height: 1.4;
         }
 
         .book-review::before {
             content: """;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             line-height: 0;
-            margin-right: 5px;
+            margin-right: 3px;
             vertical-align: sub;
         }
 
@@ -299,6 +318,22 @@
         .book-checkbox {
             transform: scale(1.2);
             cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .book-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .book-cover {
+                width: 60px;
+                height: 90px;
+            }
+            
+            .book-entry {
+                padding: 12px;
+                gap: 12px;
+            }
         }
     </style>
 </head>
@@ -337,104 +372,131 @@
                 <h2 class="category-title">Science & Philosophy</h2>
                 <div class="book-list">
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780674237544" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1520530416i/38210482.jpg" alt="The Ape that Understood the Universe cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">The Ape that Understood the Universe</h3>
                             <p class="book-author">by Steve Stewart-Williams</p>
                             <p class="book-summary">A compelling look at human behavior through evolutionary psychology and culture.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="ape-universe" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="ape-universe" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780385495325" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1320562005i/17994.jpg" alt="The Code Book cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">The Code Book</h3>
                             <p class="book-author">by Simon Singh</p>
                             <p class="book-summary">An engaging history of cryptography from ancient ciphers to quantum encryption.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="code-book" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="code-book" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062651204" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1497639002i/30231791.jpg" alt="Dollars and Sense cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Dollars and Sense</h3>
                             <p class="book-author">by Dan Ariely & Jeff Kreisler</p>
                             <p class="book-summary">How we misthink money and how to spend smarter.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="dollars-sense" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="dollars-sense" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062390851" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1483134770i/28512671.jpg" alt="Everybody Lies cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Everybody Lies</h3>
                             <p class="book-author">by Seth Stephens-Davidowitz</p>
                             <p class="book-summary">What the Internet reveals about who we really are.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="everybody-lies" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="everybody-lies" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780060731335" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1550695614i/1202.jpg" alt="Freakonomics cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Freakonomics</h3>
                             <p class="book-author">by Steven D. Levitt & Stephen J. Dubner</p>
                             <p class="book-summary">A rogue economist explores the hidden side of everything.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="freakonomics" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="freakonomics" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780316017930" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1344266315i/3228917.jpg" alt="Outliers cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Outliers</h3>
                             <p class="book-author">by Malcolm Gladwell</p>
                             <p class="book-summary">The story of success and what makes high-achievers different.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="outliers" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="outliers" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780061353246" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1166570687i/1713426.jpg" alt="Predictably Irrational cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Predictably Irrational</h3>
                             <p class="book-author">by Dan Ariely</p>
                             <p class="book-summary">The hidden forces that shape our decisions.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="predictably-irrational" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="predictably-irrational" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062316097" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1420585954i/23692271.jpg" alt="Sapiens cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Sapiens</h3>
                             <p class="book-author">by Yuval Noah Harari</p>
                             <p class="book-summary">A brief history of humankind.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="sapiens" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="sapiens" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780593418376" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1659535985i/61539416.jpg" alt="What's Our Problem? cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">What's Our Problem?</h3>
                             <p class="book-author">by Tim Urban</p>
                             <p class="book-summary">A self-help book for societies.</p>
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="whats-our-problem" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
+                            <div class="book-review">I believe this book will go down in history as one of the most important philosophical texts of the early 21st century</div>
                         </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="whats-our-problem" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                        <div class="book-review">I believe this book will go down in history as one of the most important philosophical texts of the early 21st century</div>
                     </a>
                 </div>
             </div>
@@ -443,58 +505,73 @@
                 <h2 class="category-title">Memoir & Biography</h2>
                 <div class="book-list">
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780399588174" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1473867911i/29780253.jpg" alt="Born a Crime cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Born a Crime</h3>
                             <p class="book-author">by Trevor Noah</p>
                             <p class="book-summary">Stories from a South African childhood.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="born-crime" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="born-crime" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062301239" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1518291452i/25541028.jpg" alt="Elon Musk cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Elon Musk</h3>
                             <p class="book-author">by Ashlee Vance</p>
                             <p class="book-summary">Tesla, SpaceX, and the quest for a fantastic future.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="elon-musk-bio" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="elon-musk-bio" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062300546" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1463569814i/27161156.jpg" alt="Hillbilly Elegy cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Hillbilly Elegy</h3>
                             <p class="book-author">by J.D. Vance</p>
                             <p class="book-summary">A memoir of a family and culture in crisis.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="hillbilly-elegy" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="hillbilly-elegy" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9781401324513" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1320542332i/11286394.jpg" alt="Professional Idiot cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Professional Idiot</h3>
                             <p class="book-author">by Stephen "Steve-O" Glover</p>
                             <p class="book-summary">A memoir from the Jackass star.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="professional-idiot" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="professional-idiot" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9781501135927" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1457284880i/27220736.jpg" alt="Shoe Dog cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Shoe Dog</h3>
                             <p class="book-author">by Phil Knight</p>
                             <p class="book-summary">A memoir by the creator of Nike.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="shoe-dog" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="shoe-dog" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -504,140 +581,59 @@
                 <h2 class="category-title">Fiction</h2>
                 <div class="book-list">
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780060850524" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1575509280i/5129.jpg" alt="Brave New World cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Brave New World</h3>
                             <p class="book-author">by Aldous Huxley</p>
                             <p class="book-summary">A classic dystopian novel about a controlled society.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="brave-new-world" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="brave-new-world" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780345404473" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1560090007i/7082.jpg" alt="Do Androids Dream of Electric Sheep? cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Do Androids Dream of Electric Sheep?</h3>
                             <p class="book-author">by Philip K. Dick</p>
                             <p class="book-summary">A sci-fi classic exploring what it means to be human.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="electric-sheep" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="electric-sheep" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780451524935" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1532714506i/40961427.jpg" alt="1984 cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">1984</h3>
                             <p class="book-author">by George Orwell</p>
                             <p class="book-summary">The ultimate dystopian novel about surveillance and control.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="1984" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="1984" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780486284736" target="_blank">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1424037542i/7613.jpg" alt="Animal Farm cover">
+                        </div>
                         <div class="book-details">
                             <h3 class="book-title">Animal Farm</h3>
                             <p class="book-author">by George Orwell</p>
                             <p class="book-summary">A political allegory about revolution and corruption.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="animal-farm" onclick="updateProgress()" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780553213690" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">Fahrenheit 451</h3>
-                            <p class="book-author">by Ray Bradbury</p>
-                            <p class="book-summary">A dystopian future where books are banned and burned.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" class="book-checkbox" data-book="fahrenheit-451" onclick="updateProgress()" aria-label="Mark as read">
+                            <div class="book-meta">
+                                <div class="rating-stars">★★★★</div>
+                                <input type="checkbox" class="book-checkbox" data-book="animal-farm" onclick="updateProgress()" aria-label="Mark as read">
+                            </div>
                         </div>
                     </a>
-                </div>
-            </div>
-
-            <div class="shop-link">
-                <a href="https://bookshop.org/shop/legalfundbookshop" target="_blank">Visit Our Bookshop.org Store</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // All 50 valid access codes
-        const validCodes = [
-            "defendtheinnocent", "justiceserved", "legaldefense", "courtofpublic", "verdictpending",
-            "presumedinnocent", "dueprocess", "habeascorpus", "proceedingswithcaution", "objectionoverruled",
-            "vivelarevolution", "powertothepeople", "fightthesystem", "resistanceisnotfutile", "overthrowthetyrants",
-            "freedomfighter", "rebellionrising", "dowiththeoppressors", "libertyordeath", "revolutionarytimes",
-            "healthcareforall", "medicaljustice", "universalcoverage", "patientrights", "healthequity",
-            "accessiblecare", "affordablemedicine", "publichealth", "healthcarereform", "medicalfreedom",
-            "corporategreed", "wallstreetcorruption", "executiveexcess", "profitoverpeople", "systemicinjustice",
-            "wealthinequality", "classwarfare", "economicjustice", "socialjustice", "workersrights",
-            "laborunion", "collectivebargaining", "livingwage", "fairpay", "workersunite",
-            "solidarity", "peoplepower", "grassrootsmovement", "changeiscoming", "hopeandjustice"
-        ];
-
-        // Check password function
-        function checkPassword() {
-            const input = document.getElementById('secretKeyInput').value.toLowerCase().trim();
-            const messageBox = document.getElementById('message-box');
-            
-            if (validCodes.includes(input)) {
-                // Hide access gate
-                document.getElementById('access-gate').style.display = 'none';
-                // Show passport content
-                document.getElementById('passport-content').style.display = 'flex';
-                // Show user welcome
-                document.getElementById('user-welcome').style.display = 'block';
-                // Update welcome text
-                document.getElementById('welcome-text').textContent = `Welcome, ${input}!`;
-                // Change body layout
-                document.body.style.alignItems = 'flex-start';
-                document.body.style.justifyContent = 'flex-start';
-                // Initialize progress
-                updateProgress();
-            } else {
-                messageBox.textContent = 'Invalid access code. Please try again.';
-                messageBox.style.color = 'red';
-            }
-        }
-
-        // Logout function
-        function logout() {
-            document.getElementById('access-gate').style.display = 'block';
-            document.getElementById('passport-content').style.display = 'none';
-            document.getElementById('user-welcome').style.display = 'none';
-            document.getElementById('secretKeyInput').value = '';
-            document.getElementById('message-box').textContent = '';
-            document.body.style.alignItems = 'center';
-            document.body.style.justifyContent = 'center';
-        }
-
-        // Update progress function
-        function updateProgress() {
-            const checkboxes = document.querySelectorAll('.book-checkbox');
-            const checkedBoxes = document.querySelectorAll('.book-checkbox:checked');
-            const totalBooks = checkboxes.length;
-            const completedBooks = checkedBoxes.length;
-            const percentage = totalBooks > 0 ? Math.round((completedBooks / totalBooks) * 100) : 0;
-            
-            document.getElementById('progress-fill').style.width = percentage + '%';
-            document.getElementById('progress-text').textContent = 
-                `${completedBooks} of ${totalBooks} books completed (${percentage}%)`;
-        }
-
-        // Allow Enter key to submit
-        document.getElementById('secretKeyInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-    </script>
-
-</body>
-</html>
+                    <a class="book-entry" href="https://book
