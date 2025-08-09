@@ -281,7 +281,7 @@
         <h1>Luigi's Legal Fund Bookshop</h1>
         <p>Please enter the secret key to view the exclusive reading list.</p>
         <input type="password" id="secretKeyInput" placeholder="Enter secret key">
-        <button id="submitBtn">Enter</button>
+        <button id="submitBtn" onclick="checkPassword()">Enter</button>
         <div id="message-box"></div>
     </div>
 
@@ -581,3 +581,33 @@
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780439064873" target="_blank">
+                        <div class="book-details">
+                            <h3 class="book-title">Harry Potter and the Sorcerer's Stone</h3>
+                            <p class="book-author">by J.K. Rowling</p>
+                            <p class="book-summary">The first book in the beloved Harry Potter series, following a young wizard as he discovers his magical heritage and begins his education at Hogwarts School of Witchcraft and Wizardry.</p>
+                        </div>
+                        <div class="book-meta">
+                            <div class="rating-stars">★★★★★</div>
+                            <input type="checkbox" aria-label="Mark as read">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Shop Link -->
+            <div class="shop-link">
+                <a href="https://bookshop.org/shop/legalfundbookshop" target="_blank">Visit Luigi's Legal Fund Bookshop</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const input = document.getElementById('secretKeyInput');
+            const messageBox = document.getElementById('message-box');
+            const accessGate = document.getElementById('access-gate');
+            const passportContent = document.getElementById('passport-content');
+            
+            if (input.value === 'luigi') {
+                accessGate.style.display = 'none
