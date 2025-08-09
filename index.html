@@ -83,6 +83,60 @@
             color: red;
         }
 
+        /* --- User Welcome Section --- */
+        #user-welcome {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--color-dark-green);
+            color: var(--color-white);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+
+        #logout-btn {
+            background: none;
+            border: 1px solid var(--color-white);
+            color: var(--color-white);
+            padding: 5px 10px;
+            margin-left: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        #logout-btn:hover {
+            background-color: var(--color-white);
+            color: var(--color-dark-green);
+        }
+
+        /* --- Progress Bar --- */
+        #progress-section {
+            background-color: var(--color-cream);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        #progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background-color: var(--color-mid-green);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
         /* --- Passport Styles (Hidden by default) --- */
         .passport-booklet {
             width: 100%;
@@ -246,13 +300,19 @@
             color: var(--color-white);
         }
 
+        /* Checkbox styling */
+        .book-checkbox {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
         @media print {
             body {
                 padding: 0;
                 background-color: var(--color-white);
             }
 
-            #access-gate {
+            #access-gate, #user-welcome {
                 display: none;
             }
 
@@ -276,17 +336,32 @@
 </head>
 <body>
 
+    <!-- User Welcome (Hidden by default) -->
+    <div id="user-welcome" style="display: none;">
+        <span id="welcome-text">Welcome, User!</span>
+        <button id="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
     <!-- Access Gate -->
     <div id="access-gate">
         <h1>Luigi's Legal Fund Bookshop</h1>
-        <p>Please enter the secret key to view the exclusive reading list.</p>
-        <input type="password" id="secretKeyInput" placeholder="Enter secret key">
+        <p>Please enter your unique access code to view the exclusive reading list.</p>
+        <input type="password" id="secretKeyInput" placeholder="Enter your access code">
         <button id="submitBtn" onclick="checkPassword()">Enter</button>
         <div id="message-box"></div>
     </div>
 
     <!-- Passport Content (Hidden by default) -->
     <div class="passport-booklet" id="passport-content">
+
+        <!-- Progress Section -->
+        <div id="progress-section">
+            <h3>Your Reading Progress</h3>
+            <div id="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            <p id="progress-text">0 of 0 books completed (0%)</p>
+        </div>
 
         <!-- Passport Cover -->
         <div class="cover">
@@ -309,7 +384,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="ape-universe" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780385495325" target="_blank">
@@ -320,7 +395,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="code-book" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062651204" target="_blank">
@@ -331,7 +406,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="dollars-sense" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062390851" target="_blank">
@@ -342,18 +417,18 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="everybody-lies" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780060731335" target="_blank">
                         <div class="book-details">
                             <h3 class="book-title">Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</h3>
                             <p class="book-author">by Steven D. Levitt & Stephen J. Dubner</p>
+                            <p class="book-summary">This book applies economic principles to unconventional topics, exploring the hidden motivations behind everything from crime rates to the names people give their children.</p>
                         </div>
-                        <p class="book-summary">This book applies economic principles to unconventional topics, exploring the hidden motivations behind everything from crime rates to the names people give their children.</p>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="freakonomics" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780316017930" target="_blank">
@@ -364,7 +439,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="outliers" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780061353246" target="_blank">
@@ -375,7 +450,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="predictably-irrational" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062316097" target="_blank">
@@ -386,7 +461,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="sapiens" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062851192" target="_blank">
@@ -397,7 +472,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="sapiens-graphic" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780316478526" target="_blank">
@@ -408,7 +483,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="talking-strangers" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780593418376" target="_blank">
@@ -419,7 +494,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="whats-our-problem" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                         <div class="book-review">I believe this book will go down in history as one of the most important philosophical texts of the early 21st century</div>
                     </a>
@@ -431,7 +506,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="ai-revolution" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/shop/legalfundbookshop" target="_blank">
@@ -442,7 +517,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="elon-musk-series" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                 </div>
@@ -460,7 +535,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="born-crime" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062301239" target="_blank">
@@ -471,7 +546,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="elon-musk-bio" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780062300546" target="_blank">
@@ -482,7 +557,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="hillbilly-elegy" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9781401324513" target="_blank">
@@ -493,7 +568,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="professional-idiot" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9781501135927" target="_blank">
@@ -504,7 +579,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="shoe-dog" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                 </div>
@@ -522,7 +597,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="brave-new-world" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780395569160" target="_blank">
@@ -533,7 +608,7 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="boy-samurai" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780439023498" target="_blank">
@@ -544,86 +619,9 @@
                         </div>
                         <div class="book-meta">
                             <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
+                            <input type="checkbox" class="book-checkbox" data-book="catching-fire" onclick="updateProgress()" aria-label="Mark as read">
                         </div>
                     </a>
                     <a class="book-entry" href="https://bookshop.org/a/95482/9780345404473" target="_blank">
                         <div class="book-details">
-                            <h3 class="book-title">Do Androids Dream of Electric Sheep?</h3>
-                            <p class="book-author">by Philip K. Dick</p>
-                            <p class="book-summary">The sci-fi novel that inspired Blade Runner, set in a post-apocalyptic San Francisco where a bounty hunter is tasked with "retiring" renegade androids.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780545290142" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">The Eleventh Plague</h3>
-                            <p class="book-author">by Jeff Hirsch</p>
-                            <p class="book-summary">A young adult post-apocalyptic novel that follows a teenage boy navigating a world ravaged by a plague, learning to survive and find hope in a broken society.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780812550702" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">Ender's Game</h3>
-                            <p class="book-author">by Orson Scott Card</p>
-                            <p class="book-summary">A science fiction military novel where a young genius is recruited to a space academy to be trained to lead a future war against an alien race.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars"></div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                    <a class="book-entry" href="https://bookshop.org/a/95482/9780439064873" target="_blank">
-                        <div class="book-details">
-                            <h3 class="book-title">Harry Potter and the Sorcerer's Stone</h3>
-                            <p class="book-author">by J.K. Rowling</p>
-                            <p class="book-summary">The first book in the beloved Harry Potter series, following a young wizard as he discovers his magical heritage and begins his education at Hogwarts School of Witchcraft and Wizardry.</p>
-                        </div>
-                        <div class="book-meta">
-                            <div class="rating-stars">★★★★★</div>
-                            <input type="checkbox" aria-label="Mark as read">
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Shop Link -->
-            <div class="shop-link">
-                <a href="https://bookshop.org/shop/legalfundbookshop" target="_blank">Visit Luigi's Legal Fund Bookshop</a>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        function checkPassword() {
-            const input = document.getElementById('secretKeyInput');
-            const messageBox = document.getElementById('message-box');
-            const accessGate = document.getElementById('access-gate');
-            const passportContent = document.getElementById('passport-content');
-            
-            if (input.value === 'luigi') {
-                accessGate.style.display = 'none';
-                passportContent.style.display = 'flex';
-            } else {
-                messageBox.textContent = 'Incorrect password. Please try again.';
-            }
-        }
-
-        // Allow Enter key to submit
-        document.getElementById('secretKeyInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-    </script>
-
-</body>
-</html>
+                            <h3 class="book-title">Do Androids Dream of Electric Sheep?
